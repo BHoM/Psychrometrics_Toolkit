@@ -31,8 +31,17 @@
     <WarningLevel>0</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PsychroLib, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PsychroLib.2.5.0\lib\netstandard1.0\PsychroLib.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,7 +50,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compute\DensityHumidityRatio.cs" />
+    <Compile Include="Compute\DensityRelativeHumidity.cs" />
+    <Compile Include="Compute\DensityWetBulbTemperature.cs" />
+    <Compile Include="Compute\DewPointHumidityRatio.cs" />
+    <Compile Include="Compute\DewPointRelativeHumidity.cs" />
+    <Compile Include="Compute\DewPointWetBulbTemperature.cs" />
+    <Compile Include="Compute\EnthalpyHumidityRatio.cs" />
+    <Compile Include="Compute\EnthalpyRelativeHumidity.cs" />
+    <Compile Include="Compute\EnthalpyWetBulbTemperature.cs" />
+    <Compile Include="Compute\HumidityRatioRelativeHumidity.cs" />
+    <Compile Include="Compute\HumidityRatioWetBulbTemperature.cs" />
+    <Compile Include="Compute\PartialVapourPressure.cs" />
+    <Compile Include="Compute\PressureAtAltitude.cs" />
+    <Compile Include="Compute\RelativeHumidityHumidityRatio.cs" />
+    <Compile Include="Compute\RelativeHumidityWetBulbTemperature.cs" />
+    <Compile Include="Compute\SpecificVolumeHumidityRatio.cs" />
+    <Compile Include="Compute\SpecificVolumeRelativeHumidity.cs" />
+    <Compile Include="Compute\SpecificVolumeWetBulbTemperature.cs" />
+    <Compile Include="Compute\TemperatureAtAltitude.cs" />
+    <Compile Include="Compute\TemperatureEnthalpyHumidityRatio.cs" />
+    <Compile Include="Compute\WetBulbHumidityRatio.cs" />
+    <Compile Include="Compute\WetBulbTemperatureRelativeHumidity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\BHoM\Reflection_oM\Reflection_oM.csproj">
+      <Project>{29e6dcd7-270a-45cc-ac0b-6c024287645e}</Project>
+      <Name>Reflection_oM</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\BHoM_Engine\Reflection_Engine\Reflection_Engine.csproj">
+      <Project>{b0154405-9390-472d-9b5c-a2280823b18d}</Project>
+      <Name>Reflection_Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
