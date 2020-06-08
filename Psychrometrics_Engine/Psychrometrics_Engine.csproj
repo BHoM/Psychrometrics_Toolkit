@@ -88,6 +88,8 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)$(TargetFileName)"  "C:\ProgramData\BHoM\Assemblies" /Y
+xcopy "$(TargetDir)PsychroLib.dll"  "C:\ProgramData\BHoM\Assemblies" /Y
+xcopy "$(TargetDir)System.Runtime.InteropServices.RuntimeInformation.dll"  "C:\ProgramData\BHoM\Assemblies" /Y
 </PostBuildEvent>
   </PropertyGroup>
 </Project>
