@@ -33,12 +33,22 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates temperature as a function of altitude.")]
-        [Input("altitude", "altitude (m)")]
-        [Output("temperature", "temperature (C)")]
-        public static double TemperatureAtAltitude(double altitude)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("altitude", "altitude (m) [(ft)]")]
+        [Output("temperature", "temperature (C) [(F)]")]
+        public static double TemperatureAtAltitude(string unitSystem, double altitude)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetStandardAtmTemperature(altitude);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                return psy.GetStandardAtmTemperature(altitude);
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetStandardAtmTemperature(altitude);
+            }
+
         }
     }
 }

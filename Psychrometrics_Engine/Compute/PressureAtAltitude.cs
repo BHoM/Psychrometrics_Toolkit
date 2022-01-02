@@ -33,12 +33,22 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates atmospheric pressure as a function of altitude.")]
-        [Input("altitude", "altitude (m)")]
-        [Output("atmosphericPressure", "atmospheric pressure (Pa)")]
-        public static double PressureAtAltitude(double altitude)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("altitude", "altitude (m) [(ft)]")]
+        [Output("atmosphericPressure", "atmospheric pressure (Pa) [(Psi)]")]
+        public static double PressureAtAltitude(string unitSystem, double altitude)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetStandardAtmPressure(altitude);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                return psy.GetStandardAtmPressure(altitude);
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetStandardAtmPressure(altitude);
+            }
+
         }
     }
 }

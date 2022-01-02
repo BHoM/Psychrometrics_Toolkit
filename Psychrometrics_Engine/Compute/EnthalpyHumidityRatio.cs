@@ -33,13 +33,23 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates enthalpy from dry-bulb temperature and humidity ratio.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
-        [Output("enthalpy", "enthalpy (J/kg)")]
-        public static double EnthalpyHumidityRatio(double dryBulbTemperature, double humidityRatio)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
+        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair) [(lb_water/lb_dryair)]")]
+        [Output("enthalpy", "enthalpy (J/kg) [(Btu/lb_dryair)]")]
+        public static double EnthalpyHumidityRatio(string unitSystem, double dryBulbTemperature, double humidityRatio)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
+            }
+
         }
     }
 }

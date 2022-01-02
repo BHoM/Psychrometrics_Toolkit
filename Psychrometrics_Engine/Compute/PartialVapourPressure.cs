@@ -32,13 +32,23 @@ namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates saturation pressure over liquid water for the temperature range -100C to 200C.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Output("saturationPressure", "saturation pressure (Pa)")]
-        public static double PartialVapourPressure(double dryBulbTemperature)
+        [Description("Calculates saturation pressure over liquid water for the temperature range -100C to 200C. [-148F to 392F]")]
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
+        [Output("saturationPressure", "saturation pressure (Pa) [(Psi)]")]
+        public static double PartialVapourPressure(string unitSystem, double dryBulbTemperature)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetSatVapPres(dryBulbTemperature);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                return psy.GetSatVapPres(dryBulbTemperature);
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetSatVapPres(dryBulbTemperature);
+            }
+            
         }
     }
 }

@@ -33,14 +33,25 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates dew point temperature from dry-bulb temperature and wet-bulb temperature.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("wetBulbTemperature", "wet-bulb temperature (C)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("dewPointTemperature", "dew point temperature (C)")]
-        public static double DewPointWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
+        [Input("wetBulbTemperature", "wet-bulb temperature (C) [(F)]")]
+        [Input("pressure", "pressure (Pa) [(Psi)]")]
+        [Output("dewPointTemperature", "dew point temperature (C) [(F)]")]
+        public static double DewPointWetBulbTemperature(string unitSystem, double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetTDewPointFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                return psy.GetTDewPointFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetTDewPointFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+
+            }
         }
     }
 }

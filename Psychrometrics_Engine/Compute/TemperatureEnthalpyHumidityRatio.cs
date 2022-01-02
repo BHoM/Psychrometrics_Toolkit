@@ -33,13 +33,23 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates temperature as a function of enthalpy.")]
-        [Input("enthalpy", "enthalpy (J/kg)")]
-        [Input("humidityRatio", "humidity ratio (g/g)")]
-        [Output("temperature", "temperature (C)")]
-        public static double TemperatureEnthalpyHumidityRatio(double enthalpy, double humidityRatio)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("enthalpy", "enthalpy (J/kg) [(Btu/lb_dryair)]")]
+        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair) [(lb_water/lb_dryair)]")]
+        [Output("temperature", "temperature (C) [(F)]")]
+        public static double TemperatureEnthalpyHumidityRatio(string unitSystem, double enthalpy, double humidityRatio)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetTDryBulbFromEnthalpyAndHumRatio(enthalpy, humidityRatio);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                return psy.GetTDryBulbFromEnthalpyAndHumRatio(enthalpy, humidityRatio);
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetTDryBulbFromEnthalpyAndHumRatio(enthalpy, humidityRatio);
+            }
+
         }
     }
 }

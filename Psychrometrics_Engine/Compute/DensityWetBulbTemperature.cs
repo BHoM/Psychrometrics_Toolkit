@@ -33,15 +33,29 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates density from dry-bulb temperature and wet-bulb temperature.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("wetBulbTemperature", "wet-bulb temperature (C)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("density", "density (kg/m3)")]
-        public static double DensityWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
+        [Input("wetBulbTemperature", "wet-bulb temperature (C) [(F)]")]
+        [Input("pressure", "pressure (Pa) [(Psi)]")]
+        [Output("density", "density (kg/m3) [lb/ft3)]")]
+        public static double DensityWetBulbTemperature(string unitSystem, double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            double humidityRatio = psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
-            return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
+
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                double humidityRatio = psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+                return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
+
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                double humidityRatio = psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+                return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
+
+            }
+
         }
     }
 }

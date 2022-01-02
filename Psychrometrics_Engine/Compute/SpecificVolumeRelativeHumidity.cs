@@ -33,16 +33,28 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates specific volume from dry-bulb temperature and relative humidity.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
         [Input("relativeHumidity", "relative humidity (%)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("specificVolume", "specific volume(m3/kg)")]
-        public static double SpecificVolumeRelativeHumidity(double dryBulbTemperature, double relativeHumidity, double pressure)
+        [Input("pressure", "pressure (Pa) [(Psi)]")]
+        [Output("specificVolume", "specific volume(m3/kg) [(ft3/lb)]")]
+        public static double SpecificVolumeRelativeHumidity(string unitSystem, double dryBulbTemperature, double relativeHumidity, double pressure)
         {
             relativeHumidity = relativeHumidity / 100;
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            double humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
-            return psy.GetMoistAirVolume(dryBulbTemperature, humidityRatio, pressure);
+
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                double humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
+                return psy.GetMoistAirVolume(dryBulbTemperature, humidityRatio, pressure);
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                double humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
+                return psy.GetMoistAirVolume(dryBulbTemperature, humidityRatio, pressure);
+            }
+
         }
     }
 }

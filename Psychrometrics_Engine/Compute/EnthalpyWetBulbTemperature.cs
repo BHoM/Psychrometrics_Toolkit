@@ -33,15 +33,29 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates enthalpy from dry-bulb temperature and wet-bulb temperature.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("wetBulbTemperature", "wet-bulb temperature (C)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("enthalpy", "enthalpy (J/kg)")]
-        public static double EnthalpyWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
+        [Input("wetBulbTemperature", "wet-bulb temperature (C) [(F)]")]
+        [Input("pressure", "pressure (Pa) [(Psi)]")]
+        [Output("enthalpy", "enthalpy (J/kg) [(Btu/lb_dryair)]")]
+        public static double EnthalpyWetBulbTemperature(string unitSystem, double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            double humidityRatio = psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
-            return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
+
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                double humidityRatio = psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+                return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
+
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                double humidityRatio = psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+                return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
+
+            }
+
         }
     }
 }

@@ -33,14 +33,25 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates humidity ratio from dry-bulb temperature and wet-bulb temperature.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("wetBulbTemperature", "wet-bulb temperature (C)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
-        public static double HumidityRatioWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
+        [Input("wetBulbTemperature", "wet-bulb temperature (C) [(F)]")]
+        [Input("pressure", "pressure (Pa) [(Psi)]")]
+        [Output("humidityRatio", "humidity ratio (kg_water/kg_dryair) [(lb_water/lb_dryair)]")]
+        public static double HumidityRatioWetBulbTemperature(string unitSystem, double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                return psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+
+            }
         }
     }
 }

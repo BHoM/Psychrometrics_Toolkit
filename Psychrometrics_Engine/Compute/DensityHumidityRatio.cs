@@ -36,14 +36,23 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates density from dry-bulb temperature and humidity ratio.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("density", "density(kg/m3)")]
-        public static double DensityHumidityRatio(double dryBulbTemperature, double humidityRatio, double pressure)
+        [Input("unitSystem", "SI [IP]")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C) [(F)]")]
+        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair) [(lb_water/lb_dryair)]")]
+        [Input("pressure", "pressure (Pa) [(Psi)]")]
+        [Output("density", "density(kg/m3) [lb/ft3)]")]
+        public static double DensityHumidityRatio(string unitSystem, double dryBulbTemperature, double humidityRatio, double pressure )
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
+            if (unitSystem == "SI" || unitSystem == string.Empty)
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
+                            return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
+            }
+            else
+            {
+                PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.IP);
+                return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
+            }
         }
     }
 }
