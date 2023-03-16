@@ -2,6 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Description>https://github.com/BHoM/Psychrometrics_Toolkit</Description>
+    <FileVersion>6.1.0.0</FileVersion>
+    <AssemblyVersion>6.0.0.0</AssemblyVersion>
     <BaseOutputPath>..\Build\</BaseOutputPath>
     <RootNamespace>BH.Engine.Psychrometrics</RootNamespace>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -13,7 +16,9 @@
 
   <ItemGroup>
     <Reference Include="BHoM">
-      <HintPath>..\..\..\..\..\..\..\ProgramData\BHoM\Assemblies\BHoM.dll</HintPath>
+      <HintPath>C:\ProgramData\BHoM\Assemblies\BHoM.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
 
