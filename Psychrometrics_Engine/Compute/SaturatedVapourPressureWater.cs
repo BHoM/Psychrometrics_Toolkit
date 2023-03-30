@@ -14,14 +14,15 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates water SaturatedVapourPressure from temperature")]
         [Input("temperature", "temperature [degC]")]
         [Output("saturatedVapourPressure", "Saturated Vapour Pressure [Pa]")]
+        [PreviousVersion("6.2", "BH.Engine.Climate.Compute.SaturatedVapourPressureWater(System.Double)")]
         public static double SaturatedVapourPressureWater(double temperature)
         {
-            //BH.Engine.Base.Compute.RecordWarning("This method has not been thoroughly tested. The output may be incorrect. Use at own risk.");
+            BH.Engine.Base.Compute.RecordWarning("This method has not been thoroughly tested. The output may be incorrect. Use at own risk.");
 
             double t = temperature;
             if (t < 0 || t > 150)
             {
-                //BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC");
+                BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC");
                 return -1;
             }
             else if (temperature < 21)

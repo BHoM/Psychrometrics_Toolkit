@@ -35,12 +35,13 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates water density from temperature")]
         [Input("temperature", "temperature [degC]")]
         [Output("density", "Density [kg/m3]")]
+        [PreviousVersion("6.2", "BH.Engine.Climate.Compute.DensityWater(System.Double)")]
         public static double DensityWater(double temperature)
         {
             double t = temperature;
             if (t < 0 || t > 150)
             {
-                //BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC");
+                BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC");
                 return -1;
             }
             else

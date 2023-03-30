@@ -14,12 +14,13 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates Water SpecificHeatCapacity from temperature")]
         [Input("temperature", "temperature [degC]")]
         [Output("specificHeatCapacity", "Specific Heat Capacity [kJ/kgK]")]
+        [PreviousVersion("6.2", "BH.Engine.Climate.Compute.SpecificHeatCapacityWater(System.Double)")]
         public static double SpecificHeatCapacityWater(double temperature)
         {
             double t = temperature;
             if (t < 0 || t > 150)
             {
-                //BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC");
+                BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC");
                 return -1;
             }
             else
