@@ -51,7 +51,7 @@ namespace BH.Engine.Psychrometrics
                 PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
                 return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
             }
-            if (pressure != double.MinValue) 
+            if (pressure == double.MinValue) 
             {
                 BH.Engine.Base.Compute.RecordError($"To calculate relativeHumidity or wetBulbTemperature, a pressure value must be used.");
                 return 0;
