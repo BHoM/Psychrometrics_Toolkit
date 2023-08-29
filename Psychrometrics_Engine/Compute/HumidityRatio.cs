@@ -33,20 +33,19 @@ namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates humidity ratio from dry-bulb temperature, pressure and one of: humidityRatio, relativeHumidity or wetBulbTemperature.")]
+        [Description("Calculates humidity ratio from dry-bulb temperature, pressure and one of: relativeHumidity or wetBulbTemperature.")]
         [Input("dryBulbTemperature", "Dry-bulb temperature (C)")]
         [Input("pressure", "Pressure (Pa)")]
-        [Input("humidityRatio", "Humidity ratio (kg_water/kg_dryair)")]
         [Input("relativeHumidity", "Relative humidity (%)")]
         [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
-        [Output("enthalpy", "Enthalpy(J/kg)")]
+        [Output("humidityRatio", "Humidity ratio (kg_water/kg_dryair)")]
         public static double HumidityRatio(double dryBulbTemperature, double pressure, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
             if (relativeHumidity != double.MinValue)
             {
                 if (wetBulbTemperature != double.MinValue)
                 {
-                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising relativeHumidity for calculating HumidityRatio. If you want to use a wetBulbTemperature, remove relativeHumidity.");
+                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising relativeHumidity for calculating humidityRatio. If you want to use a wetBulbTemperature, remove relativeHumidity.");
                 }
                 relativeHumidity = relativeHumidity / 100;
                 PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
@@ -59,7 +58,7 @@ namespace BH.Engine.Psychrometrics
             }
             else
             {
-                BH.Engine.Base.Compute.RecordError($"one of the following parameters must have a value: humidityRatio, relativeHumidity, wetBulbTemperature.");
+                BH.Engine.Base.Compute.RecordError($"one of the following parameters must have a value: relativeHumidity, wetBulbTemperature.");
                 return 0;
             }
         }

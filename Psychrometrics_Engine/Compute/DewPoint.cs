@@ -38,7 +38,7 @@ namespace BH.Engine.Psychrometrics
         [Input("humidityRatio", "Humidity ratio (kg_water/kg_dryair)")]
         [Input("relativeHumidity", "Relative humidity (%)")]
         [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
-        [Output("dewPointTemperature", "Dew point temperature(C)")]
+        [Output("dewPointTemperature", "Dew point temperature (C)")]
         public static double DewPoint(double dryBulbTemperature, double pressure, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
             if (humidityRatio != double.MinValue)
@@ -46,7 +46,7 @@ namespace BH.Engine.Psychrometrics
                 PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
                 if (relativeHumidity != double.MinValue || wetBulbTemperature != double.MinValue)
                 {
-                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising humidityRatio for calculating DewPoint. If you want to use a different parameter, remove humidityRatio.");
+                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising humidityRatio for calculating dewPointTemperature. If you want to use a different parameter, remove humidityRatio.");
                 }
                 return psy.GetTDewPointFromHumRatio(dryBulbTemperature, humidityRatio, pressure);
             }
@@ -57,7 +57,7 @@ namespace BH.Engine.Psychrometrics
                 humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
                 if (wetBulbTemperature != double.MinValue)
                 {
-                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising relativeHumidity for calculating DewPoint. If you want to use a wetBulbTemperature, remove relativeHumidity.");
+                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising relativeHumidity for calculating dewPointTemperature. If you want to use a wetBulbTemperature, remove relativeHumidity.");
                 }
                 return psy.GetTDewPointFromHumRatio(dryBulbTemperature, humidityRatio, pressure);
             }

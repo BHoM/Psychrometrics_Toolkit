@@ -36,12 +36,12 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates density from dry-bulb temperature, pressure and one of: humidityRatio, relativeHumidity or wetBulbTemperature.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
-        [Input("relativeHumidity", "relative humidity (%)")]
-        [Input("wetBulbTemperature", "wet-bulb temperature (C)")]
-        [Output("density", "density(kg/m3)")]
+        [Input("dryBulbTemperature", "Dry-bulb temperature (C)")]
+        [Input("pressure", "Pressure (Pa)")]
+        [Input("humidityRatio", "Humidity ratio (kg_water/kg_dryair)")]
+        [Input("relativeHumidity", "Relative humidity (%)")]
+        [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
+        [Output("density", "Density (kg/m3)")]
         public static double Density(double dryBulbTemperature, double pressure, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
 
@@ -50,7 +50,7 @@ namespace BH.Engine.Psychrometrics
                 PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
                 if (relativeHumidity != double.MinValue || wetBulbTemperature != double.MinValue )
                 {
-                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising humidityRatio for calculating Density. If you want to use a different parameter, remove humidityRatio.");
+                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising humidityRatio for calculating density. If you want to use a different parameter, remove humidityRatio.");
                 }
                 return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
             }
@@ -61,7 +61,7 @@ namespace BH.Engine.Psychrometrics
                 humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
                 if (wetBulbTemperature != double.MinValue)
                 {
-                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising relativeHumidity for calculating Density. If you want to use wetBulbTemperature, remove relativeHumidity.");
+                    BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising relativeHumidity for calculating density. If you want to use wetBulbTemperature, remove relativeHumidity.");
                 }
                 return psy.GetMoistAirDensity(dryBulbTemperature, humidityRatio, pressure);
             }
