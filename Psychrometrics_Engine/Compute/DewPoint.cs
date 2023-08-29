@@ -55,7 +55,7 @@ namespace BH.Engine.Psychrometrics
                 relativeHumidity = relativeHumidity / 100;
                 PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
                 humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
-                if (relativeHumidity != double.MinValue || wetBulbTemperature != double.MinValue)
+                if (wetBulbTemperature != double.MinValue)
                 {
                     BH.Engine.Base.Compute.RecordWarning($"Warning: This function is prioritising relativeHumidity for calculating DewPoint. If you want to use a wetBulbTemperature, remove relativeHumidity.");
                 }
