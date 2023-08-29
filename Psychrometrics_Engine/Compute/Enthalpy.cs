@@ -54,6 +54,7 @@ namespace BH.Engine.Psychrometrics
             if (pressure != double.MinValue) 
             {
                 BH.Engine.Base.Compute.RecordError($"To calculate relativeHumidity or wetBulbTemperature, a pressure value must be used.");
+                return 0;
             }
             if (relativeHumidity != double.MinValue)
             {
