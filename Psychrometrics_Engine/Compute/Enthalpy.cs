@@ -40,7 +40,7 @@ namespace BH.Engine.Psychrometrics
         [Input("relativeHumidity", "Relative humidity (%)")]
         [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
         [Output("enthalpy", "Enthalpy (J/kg)")]
-        public static double Enthalpy(double dryBulbTemperature, double pressure, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
+        public static double Enthalpy(double dryBulbTemperature, double pressure = double.MinValue, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
             if (humidityRatio != double.MinValue)
             {
@@ -50,6 +50,10 @@ namespace BH.Engine.Psychrometrics
                 }
                 PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
                 return psy.GetMoistAirEnthalpy(dryBulbTemperature, humidityRatio);
+            }
+            if (pressure != double.MinValue) 
+            {
+                BH.Engine.Base.Compute.RecordError($"To calculate relativeHumidity or wetBulbTemperature, a pressure value must be used.");
             }
             if (relativeHumidity != double.MinValue)
             {
