@@ -42,6 +42,9 @@ namespace BH.Engine.Psychrometrics
         [Input("relativeHumidity", "Relative humidity (%)")]
         [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
         [Output("specificVolume", "Specific volume (m3/kg)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.SpecificVolumeHumidityRatio(System.Double, System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.SpecificVolumeRelativeHumidity(System.Double, System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.SpecificVolumeWetBulbTemperature(System.Double, System.Double, System.Double)")]
         public static double SpecificVolume(double dryBulbTemperature, double pressure, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
 

@@ -42,6 +42,9 @@ namespace BH.Engine.Psychrometrics
         [Input("relativeHumidity", "Relative humidity (%)")]
         [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
         [Output("density", "Density (kg/m3)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DensityHumidityRatio(System.Double, System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DensityRelativeHumidity(System.Double, System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DensityWetBulbTemperature(System.Double, System.Double, System.Double)")]
         public static double Density(double dryBulbTemperature, double pressure, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
 

@@ -39,6 +39,9 @@ namespace BH.Engine.Psychrometrics
         [Input("relativeHumidity", "Relative humidity (%)")]
         [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
         [Output("dewPointTemperature", "Dew point temperature (C)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DewPointHumidityRatio(System.Double, System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DewPointRelativeHumidity(System.Double, System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DewPointWetBulbTemperature(System.Double, System.Double, System.Double)")]
         public static double DewPoint(double dryBulbTemperature, double pressure, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
             if (humidityRatio != double.MinValue)

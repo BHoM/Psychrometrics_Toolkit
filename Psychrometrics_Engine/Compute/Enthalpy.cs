@@ -40,6 +40,9 @@ namespace BH.Engine.Psychrometrics
         [Input("relativeHumidity", "Relative humidity (%)")]
         [Input("wetBulbTemperature", "Wet-bulb temperature (C)")]
         [Output("enthalpy", "Enthalpy (J/kg)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.EnthalpyHumidityRatio(System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.EnthalpyRelativeHumidity(System.Double, System.Double, System.Double)")]
+        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.EnthalpyWetBulbTemperature(System.Double, System.Double, System.Double)")]
         public static double Enthalpy(double dryBulbTemperature, double pressure = double.MinValue, double humidityRatio = double.MinValue, double relativeHumidity = double.MinValue, double wetBulbTemperature = double.MinValue)
         {
             if (humidityRatio != double.MinValue)
