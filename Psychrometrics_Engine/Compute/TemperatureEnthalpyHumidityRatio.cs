@@ -27,6 +27,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
+using BH.Engine.Units;
 
 namespace BH.Engine.Psychrometrics
 {
@@ -39,7 +40,7 @@ namespace BH.Engine.Psychrometrics
         public static double TemperatureEnthalpyHumidityRatio(double enthalpy, double humidityRatio)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetTDryBulbFromEnthalpyAndHumRatio(enthalpy, humidityRatio); // add temperature conversion here
+            return Units.Convert.FromDegreeCelsius(psy.GetTDryBulbFromEnthalpyAndHumRatio(enthalpy, humidityRatio));
         }
     }
 }
