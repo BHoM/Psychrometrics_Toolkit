@@ -29,6 +29,7 @@ using System.ComponentModel;
 using BH.oM.Base.Attributes;
 using BH.oM.Base;
 using BH.Engine.Base;
+using BH.Engine.Units;
 
 namespace BH.Engine.Psychrometrics
 {
@@ -40,8 +41,7 @@ namespace BH.Engine.Psychrometrics
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.DensityWater(System.Double)")]
         public static double DensityWater(double temperature)
         {
-            //add temperature conversion here
-            double t = temperature;
+            double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)
             {
                 BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC.");

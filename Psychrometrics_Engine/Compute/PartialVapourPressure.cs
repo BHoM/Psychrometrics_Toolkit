@@ -38,8 +38,9 @@ namespace BH.Engine.Psychrometrics
         public static double PartialVapourPressure(double dryBulbTemperature)
         {
             // add unit conversion here
+            
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetSatVapPres(dryBulbTemperature);
+            return psy.GetSatVapPres(Units.Convert.ToDegreeCelsius(dryBulbTemperature));
         }
     }
 }
