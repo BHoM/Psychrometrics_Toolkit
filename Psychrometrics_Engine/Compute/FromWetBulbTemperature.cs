@@ -34,13 +34,13 @@ namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates density, enthalpy, dew-point temperature, humidity ratio, relative humidity and specific volume from dry-bulb temperature, pressure and wet-bulb temperature.")]
-        [Input("dryBulbTemperature", "Dry-bulb temperature (C).")]
-        [Input("wetBulbTemperature", "Wet-bulb temperature (C).")]
+        [Description("Calculates density (kg/m3), enthalpy (J/kg), dew-point temperature (K), humidity ratio (kg_water/kg_dryair), relative humidity (%) and specific volume (m3/kg) from dry-bulb temperature (K), pressure (Pa) and wet-bulb temperature (K).")]
+        [Input("dryBulbTemperature", "Dry-bulb temperature (K).")]
+        [Input("wetBulbTemperature", "Wet-bulb temperature (K).")]
         [Input("pressure", "Air pressure (Pa), defaults to sea level air pressure (101,325 Pa).")]
         [MultiOutput(0, "density", "Density (kg/m3).")]
         [MultiOutput(1, "enthalpy", "Enthalpy (J/kg).")]
-        [MultiOutput(2, "dewPoint", "Dew-point temperature (C).")]
+        [MultiOutput(2, "dewPoint", "Dew-point temperature (K).")]
         [MultiOutput(3, "humidityRatio", "Humidity ratio (kg_water/kg_dryair).")]
         [MultiOutput(4, "relativeHumidity", "Relative humidity (%).")]
         [MultiOutput(5, "specificVolume", "Specific Volume (m3/kg).")]
