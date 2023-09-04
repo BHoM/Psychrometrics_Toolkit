@@ -34,16 +34,16 @@ namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates density, enthalpy, dew-point temperature, humidity ratio, specific volume and wet-bulb temperature from dry-bulb temperature, pressure and relative humidity.")]
-        [Input("dryBulbTemperature", "Dry-bulb temperature (C).")]
+        [Description("Calculates density (kg/m3), enthalpy (J/kg), dew-point temperature (K), humidity ratio (%), specific volume (m3/kg) and wet-bulb temperature (K) from dry-bulb temperature (K), pressure (Pa) and relative humidity (%).")]
+        [Input("dryBulbTemperature", "Dry-bulb temperature (K).")]
         [Input("relativeHumidity", "Relative humidity (%).")]
         [Input("pressure", "Air pressure (Pa), defaults to sea level air pressure (101,325 Pa).")]
         [MultiOutput(0, "density", "Density (kg/m3).")]
         [MultiOutput(1, "enthalpy", "Enthalpy (J/kg).")]
-        [MultiOutput(2, "dewPoint", "Dew-point temperature (C).")]
+        [MultiOutput(2, "dewPoint", "Dew-point temperature (K).")]
         [MultiOutput(3, "humidityRatio", "Humidity ratio (kg_water/kg_dryair).")]
         [MultiOutput(4, "specificVolume", "Specific Volume (m3/kg).")]
-        [MultiOutput(5, "wetBulbTemperature", "Wet-bulb temperature (C).")]
+        [MultiOutput(5, "wetBulbTemperature", "Wet-bulb temperature (K).")]
         [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DensityRelativeHumidity(System.Double, System.Double, System.Double)")]
         [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.EnthalpyRelativeHumidity(System.Double, System.Double, System.Double)")]
         [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DewPointRelativeHumidity(System.Double, System.Double, System.Double)")]
