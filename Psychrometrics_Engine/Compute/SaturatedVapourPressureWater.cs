@@ -43,13 +43,13 @@ namespace BH.Engine.Psychrometrics
             BH.Engine.Base.Compute.RecordWarning("This method has not been thoroughly tested. The output may be incorrect. Use at own risk.");
             // add temperature conversion here
 
-            double t = temperature;
+            double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)
             {
                 BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC.");
                 return double.NaN;
             }
-            else if (temperature < 21)
+            else if (Units.Convert.ToDegreeCelsius(temperature) < 21)
             {
                 return 6.10830198582769e-03 + 3.69554702125838e-04 * t + 2.4671509929139e-05 * Math.Pow(t, 2);
             }

@@ -41,10 +41,10 @@ namespace BH.Engine.Psychrometrics
         public static double SpecificHeatCapacityWater(double temperature)
         {
             // add temperature conversion here
-            double t = temperature;
+            double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)
             {
-                BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC.");
+                BH.Engine.Base.Compute.RecordError("Temperature must be greater than 273.15 K and less than 423.15 K.");
                 return double.NaN;
             }
             else
