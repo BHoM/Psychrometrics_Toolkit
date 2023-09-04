@@ -29,6 +29,7 @@ using System.ComponentModel;
 using BH.oM.Base.Attributes;
 using BH.oM.Base;
 using BH.Engine.Base;
+using BH.Engine.Units;
 
 namespace BH.Engine.Psychrometrics
 {
@@ -55,12 +56,17 @@ namespace BH.Engine.Psychrometrics
             double humidityRatio,
             double pressure = 101325)
         {
+            dryBulbTemperature = BH.Engine.Units.Convert.ToDegreeCelsius(dryBulbTemperature);
+
             double Density = DensityHumidityRatio(dryBulbTemperature, humidityRatio, pressure);
             double Enthalpy = EnthalpyHumidityRatio(dryBulbTemperature, humidityRatio);
             double DewPoint = DewPointHumidityRatio(dryBulbTemperature, humidityRatio, pressure);
             double RelativeHumidity = RelativeHumidityHumidityRatio(dryBulbTemperature, humidityRatio, pressure);
             double SpecificVolume = SpecificVolumeHumidityRatio(dryBulbTemperature, humidityRatio, pressure);
             double WetBulbTemperature = WetBulbHumidityRatio(dryBulbTemperature, humidityRatio, pressure);
+
+            DewPoint = BH.Engine.Units.Convert.FromDegreeCelsius(DewPoint);
+            WetBulbTemperature = BH.Engine.Units.Convert.FromDegreeCelsius(WetBulbTemperature);
 
             return new Output<double, double, double, double, double, double>
             {
