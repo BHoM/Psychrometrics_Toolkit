@@ -34,11 +34,11 @@ namespace BH.Engine.Psychrometrics
     {
         [Description("Calculates temperature as a function of altitude.")]
         [Input("altitude", "altitude (m)")]
-        [Output("temperature", "temperature (C)")]
+        [Output("temperature", "temperature (K)")]
         public static double TemperatureAtAltitude(double altitude)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetStandardAtmTemperature(altitude);
+            return psy.GetStandardAtmTemperature(altitude); // add temperature conversion here
         }
     }
 }

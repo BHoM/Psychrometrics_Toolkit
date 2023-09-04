@@ -39,7 +39,7 @@ namespace BH.Engine.Psychrometrics
         public static double TemperatureEnthalpyHumidityRatio(double enthalpy, double humidityRatio)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetTDryBulbFromEnthalpyAndHumRatio(enthalpy, humidityRatio);
+            return psy.GetTDryBulbFromEnthalpyAndHumRatio(enthalpy, humidityRatio); // add temperature conversion here
         }
     }
 }

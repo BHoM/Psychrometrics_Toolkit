@@ -35,12 +35,13 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates water SaturatedVapourPressure from temperature.")]
-        [Input("temperature", "temperature (degC).")]
+        [Input("temperature", "temperature (K).")]
         [Output("saturatedVapourPressure", "Saturated Vapour Pressure (Pa).")]
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SaturatedVapourPressureWater(System.Double)")]
         public static double SaturatedVapourPressureWater(double temperature)
         {
             BH.Engine.Base.Compute.RecordWarning("This method has not been thoroughly tested. The output may be incorrect. Use at own risk.");
+            // add temperature conversion here
 
             double t = temperature;
             if (t < 0 || t > 150)
