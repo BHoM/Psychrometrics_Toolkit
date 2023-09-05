@@ -36,7 +36,7 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates water SaturatedVapourPressure from temperature.")]
-        [Input("temperature", "Temperature.", typeof(Temperature))]
+        [Input("water temperature", "Water Temperature.", typeof(Temperature))]
         [Output("saturatedVapourPressure", "Saturated Vapour Pressure.", typeof(Pressure))]
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SaturatedVapourPressureWater(System.Double)")]
         public static double SaturatedVapourPressureWater(double temperature)
@@ -46,7 +46,7 @@ namespace BH.Engine.Psychrometrics
             double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)
             {
-                BH.Engine.Base.Compute.RecordError("Temperature must be greater than 0 and less than 150 degC.");
+                BH.Engine.Base.Compute.RecordError("Water temperature must be greater than 273.15 and less than 423.15 K.");
                 return double.NaN;
             }
             else if (Units.Convert.ToDegreeCelsius(temperature) < 21)
