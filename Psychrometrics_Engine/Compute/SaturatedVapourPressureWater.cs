@@ -36,7 +36,7 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates water SaturatedVapourPressure from temperature.")]
-        [Input("water temperature", "Water Temperature.", typeof(Temperature))]
+        [Input("temperature", "Water Temperature.", typeof(Temperature))]
         [Output("saturatedVapourPressure", "Saturated Vapour Pressure.", typeof(Pressure))]
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SaturatedVapourPressureWater(System.Double)")]
         public static double SaturatedVapourPressureWater(double temperature)
