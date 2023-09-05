@@ -29,19 +29,19 @@ using System.ComponentModel;
 using BH.oM.Base.Attributes;
 using BH.oM.Base;
 using BH.Engine.Base;
+using BH.oM.Quantities.Attributes;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates water SaturatedVapourPressure from temperature.")]
-        [Input("temperature", "temperature (K).")]
-        [Output("saturatedVapourPressure", "Saturated Vapour Pressure (Pa).")]
+        [Input("temperature", "Temperature.", typeof(Temperature))]
+        [Output("saturatedVapourPressure", "Saturated Vapour Pressure.", typeof(Pressure))]
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SaturatedVapourPressureWater(System.Double)")]
         public static double SaturatedVapourPressureWater(double temperature)
         {
             BH.Engine.Base.Compute.RecordWarning("This method has not been thoroughly tested. The output may be incorrect. Use at own risk.");
-            // add temperature conversion here
 
             double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)

@@ -28,14 +28,15 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
 using BH.Engine.Units;
+using BH.oM.Quantities.Attributes;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates temperature as a function of altitude.")]
-        [Input("altitude", "altitude (m)")]
-        [Output("temperature", "temperature (K)")]
+        [Input("altitude", "Altitude.", typeof(Length))]
+        [Output("temperature", "Temperature.", typeof(Temperature))]
         public static double TemperatureAtAltitude(double altitude)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);

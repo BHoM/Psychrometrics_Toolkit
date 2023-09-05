@@ -28,15 +28,16 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
 using BH.Engine.Units;
+using BH.oM.Quantities.Attributes;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates temperature as a function of enthalpy.")]
-        [Input("enthalpy", "enthalpy (J/kg)")]
-        [Input("humidityRatio", "humidity ratio (g/g)")]
-        [Output("temperature", "temperature (C)")]
+        [Input("enthalpy", "Enthalpy.", typeof(SpecificEnergy))]
+        [Input("humidityRatio", "Humidity ratio (kg_water/kg_dryair).", typeof(Ratio))]
+        [Output("temperature", "Temperature.", typeof(Temperature))]
         public static double TemperatureEnthalpyHumidityRatio(double enthalpy, double humidityRatio)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);

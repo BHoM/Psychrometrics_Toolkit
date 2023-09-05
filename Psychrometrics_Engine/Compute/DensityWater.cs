@@ -30,14 +30,15 @@ using BH.oM.Base.Attributes;
 using BH.oM.Base;
 using BH.Engine.Base;
 using BH.Engine.Units;
+using BH.oM.Quantities.Attributes;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates water density from temperature.")]
-        [Input("temperature", "temperature (K).")]
-        [Output("density", "Density (kg/m3).")]
+        [Input("temperature", "Temperature.", typeof(Temperature))]
+        [Output("density", "Density.", typeof(Density))]
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.DensityWater(System.Double)")]
         public static double DensityWater(double temperature)
         {
