@@ -29,13 +29,14 @@ using System.ComponentModel;
 using BH.oM.Base.Attributes;
 using BH.oM.Base;
 using BH.Engine.Base;
+using BH.oM.Quantities.Attributes;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates Water SpecificHeatCapacity from temperature.")]
-        [Input("temperature", "temperature (K).")]
+        [Input("temperature", "Temperature.", typeof(Temperature))]
         [Output("specificHeatCapacity", "Specific Heat Capacity (kJ/kgK).")]
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SpecificHeatCapacityWater(System.Double)")]
         public static double SpecificHeatCapacityWater(double temperature)
