@@ -45,7 +45,7 @@ namespace BH.Engine.Psychrometrics
         [MultiOutput(2, "dewPoint", "Dew-point temperature.", typeof(Temperature))]
         [MultiOutput(3, "relativeHumidity", "Relative humidity (%).")]
         [MultiOutput(4, "specificVolume", "Specific Volume.",typeof(VolumePerQuantity))]
-        [MultiOutput(5, "wetBulbTemperature", "Wet-bulb temperature.",typeof(Temperature))]
+        [MultiOutput(5, "wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
         [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DensityHumidityRatio(System.Double, System.Double, System.Double)")]
         [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.EnthalpyHumidityRatio(System.Double, System.Double)")]
         [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DewPointHumidityRatio(System.Double, System.Double, System.Double)")]
