@@ -40,7 +40,7 @@ namespace BH.Engine.Psychrometrics
         [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
         [Input("humidityRatio", "Humidity ratio (kg_water/kg_dryair).", typeof(Ratio))]
         [Input("pressure", "Air pressure, defaults to sea level air pressure (101,325).",typeof(Pressure))]
-        [MultiOutput(0, "density", "Density.",typeof(Density))]
+        [MultiOutput(0, "density", "Density.", typeof(Density))]
         [MultiOutput(1, "enthalpy", "Enthalpy.",typeof(SpecificEnergy))]
         [MultiOutput(2, "dewPoint", "Dew-point temperature.", typeof(Temperature))]
         [MultiOutput(3, "relativeHumidity", "Relative humidity (%).")]
