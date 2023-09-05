@@ -35,8 +35,8 @@ namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates Water SpecificHeatCapacity from temperature.")]
-        [Input("temperature", "Temperature.", typeof(Temperature))]
+        [Description("Calculates Water SpecificHeatCapacity from water temperature.")]
+        [Input("water temperature", "Water Temperature.", typeof(Temperature))]
         [Output("specificHeatCapacity", "Specific Heat Capacity (kJ/kgK).")]
         [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SpecificHeatCapacityWater(System.Double)")]
         public static double SpecificHeatCapacityWater(double temperature)
@@ -45,7 +45,7 @@ namespace BH.Engine.Psychrometrics
             double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)
             {
-                BH.Engine.Base.Compute.RecordError("Temperature must be greater than 273.15 K and less than 423.15 K.");
+                BH.Engine.Base.Compute.RecordError("Water temperature must be greater than 273.15 K and less than 423.15 K.");
                 return double.NaN;
             }
             else
