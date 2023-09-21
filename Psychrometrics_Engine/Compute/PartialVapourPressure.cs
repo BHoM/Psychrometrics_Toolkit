@@ -27,18 +27,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
+using BH.oM.Quantities.Attributes;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates saturation pressure over liquid water for the temperature range -100C to 200C.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Output("saturationPressure", "saturation pressure (Pa)")]
+        [Description("Calculates saturation pressure over liquid water for the temperature range 173.15K to 473.15K.")]
+        [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
+        [Output("saturationPressure", "Saturation pressure.", typeof(Pressure))]
         public static double PartialVapourPressure(double dryBulbTemperature)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetSatVapPres(dryBulbTemperature);
+            return psy.GetSatVapPres(Units.Convert.ToDegreeCelsius(dryBulbTemperature));
         }
     }
 }

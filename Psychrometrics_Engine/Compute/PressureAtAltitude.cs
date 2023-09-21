@@ -27,14 +27,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
+using BH.oM.Quantities.Attributes;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates atmospheric pressure as a function of altitude.")]
-        [Input("altitude", "altitude (m)")]
-        [Output("atmosphericPressure", "atmospheric pressure (Pa)")]
+        [Input("altitude", "Altitude", typeof(Length))]
+        [Output("atmosphericPressure", "Atmospheric pressure.", typeof(Pressure))]
         public static double PressureAtAltitude(double altitude)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);

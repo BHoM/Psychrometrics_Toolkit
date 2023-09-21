@@ -1,4 +1,4 @@
-/*
+﻿/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2023, the respective contributors. All rights reserved.
  *
@@ -27,6 +27,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
+using BH.oM.Base;
+using BH.Engine.Base;
 using BH.Engine.Units;
 using BH.oM.Quantities.Attributes;
 
@@ -34,15 +36,22 @@ namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates air temperature as a function of altitude above sea level.")]
-        [Input("altitude", "Altitude above sea level.", typeof(Length))]
-        [Output("air temperature", "Air Temperature.", typeof(Temperature))]
-        public static double TemperatureAtAltitude(double altitude)
+        [Description("Calculates water density from temperature.")]
+        [Input("temperature", "Water Temperature.", typeof(Temperature))]
+        [Output("density", "Density.", typeof(Density))]
+        [PreviousVersion("6.3", "BH.Engine.Climate.Compute.DensityWater(System.Double)")]
+        public static double DensityWater(double temperature)
         {
-            PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return Units.Convert.FromDegreeCelsius(psy.GetStandardAtmTemperature(altitude));
+            double t = Units.Convert.ToDegreeCelsius(temperature);
+            if (t < 0 || t > 150)
+            {
+                BH.Engine.Base.Compute.RecordError("Water temperature must be greater than 273.15 and less than 423.15 K.");
+                return double.NaN;
+            }
+            else
+            {
+                return 999.792764532729 + 0.07544354069978 * t - 8.88812233461067e-03 * Math.Pow(t, 2) + 7.43496157156187e-05 * Math.Pow(t, 3) - 5.05819372165206e-07 * Math.Pow(t, 4) + 1.71286251848812e-09 * Math.Pow(t, 5) - 3.41712769191815e-13 * Math.Pow(t, 6) - 8.9940922954777e-15 * Math.Pow(t, 7);
+            }
         }
     }
 }
-
-
