@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2023, the respective contributors. All rights reserved.
  *
@@ -46,12 +46,6 @@ namespace BH.Engine.Psychrometrics
         [MultiOutput(3, "relativeHumidity", "Relative humidity (%).")]
         [MultiOutput(4, "specificVolume", "Specific Volume.", typeof(VolumePerQuantity))]
         [MultiOutput(5, "wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DensityHumidityRatio(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.EnthalpyHumidityRatio(System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DewPointHumidityRatio(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.RelativeHumidityHumidityRatio(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.SpecificVolumeHumidityRatio(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.WetBulbHumidityRatio(System.Double, System.Double, System.Double)")]
         public static Output<double, double, double, double, double, double> FromHumidityRatio(
             double dryBulbTemperature,
             double humidityRatio,
