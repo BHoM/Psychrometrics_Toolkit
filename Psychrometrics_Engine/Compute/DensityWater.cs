@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2023, the respective contributors. All rights reserved.
  *
@@ -39,7 +39,6 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates water density from temperature.")]
         [Input("temperature", "Water Temperature.", typeof(Temperature))]
         [Output("density", "Density.", typeof(Density))]
-        [PreviousVersion("6.3", "BH.Engine.Climate.Compute.DensityWater(System.Double)")]
         public static double DensityWater(double temperature)
         {
             double t = Units.Convert.ToDegreeCelsius(temperature);

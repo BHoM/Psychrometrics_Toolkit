@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2023, the respective contributors. All rights reserved.
  *
@@ -38,7 +38,6 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates water SaturatedVapourPressure from temperature.")]
         [Input("temperature", "Water Temperature.", typeof(Temperature))]
         [Output("saturatedVapourPressure", "Saturated Vapour Pressure.", typeof(Pressure))]
-        [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SaturatedVapourPressureWater(System.Double)")]
         public static double SaturatedVapourPressureWater(double temperature)
         {
             BH.Engine.Base.Compute.RecordWarning("This method has not been thoroughly tested. The output may be incorrect. Use at own risk.");

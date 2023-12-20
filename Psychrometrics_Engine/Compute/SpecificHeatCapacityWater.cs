@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2023, the respective contributors. All rights reserved.
  *
@@ -38,7 +38,6 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates Water SpecificHeatCapacity from water temperature.")]
         [Input("temperature", "Water Temperature.", typeof(Temperature))]
         [Output("specificHeatCapacity", "Specific Heat Capacity (kJ/kgK).")]
-        [PreviousVersion("6.3", "BH.Engine.Climate.Compute.SpecificHeatCapacityWater(System.Double)")]
         public static double SpecificHeatCapacityWater(double temperature)
         {
             // add temperature conversion here

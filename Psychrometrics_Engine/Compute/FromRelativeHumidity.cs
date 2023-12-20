@@ -1,4 +1,4 @@
-﻿/*
+/*
  * This file is part of the Buildings and Habitats object Model (BHoM)
  * Copyright (c) 2015 - 2023, the respective contributors. All rights reserved.
  *
@@ -46,12 +46,6 @@ namespace BH.Engine.Psychrometrics
         [MultiOutput(3, "humidityRatio", "Humidity ratio (kg_water/kg_dryair).", typeof(Ratio))]
         [MultiOutput(4, "specificVolume", "Specific Volume.", typeof(VolumePerQuantity))]
         [MultiOutput(5, "wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DensityRelativeHumidity(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.EnthalpyRelativeHumidity(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.DewPointRelativeHumidity(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.HumidityRatioRelativeHumidity(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.SpecificVolumeRelativeHumidity(System.Double, System.Double, System.Double)")]
-        [PreviousVersion("6.3", "BH.Engine.Psychrometrics.Compute.WetBulbTemperatureRelativeHumidity(System.Double, System.Double, System.Double)")]
         public static Output<double, double, double, double, double, double> FromRelativeHumidity(
             double dryBulbTemperature,
             double relativeHumidity,
