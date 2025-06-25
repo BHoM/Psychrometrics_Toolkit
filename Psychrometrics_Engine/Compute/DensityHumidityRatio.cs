@@ -35,10 +35,10 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates density from dry-bulb temperature and humidity ratio.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("density", "density(kg/m3)")]
+        [Input("dryBulbTemperature", "dry-bulb temperature (C).")]
+        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair).")]
+        [Input("pressure", "pressure (Pa).")]
+        [Output("density", "density(kg/m3).")]
         public static double DensityHumidityRatio(double dryBulbTemperature, double humidityRatio, double pressure)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
