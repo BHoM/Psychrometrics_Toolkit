@@ -27,22 +27,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
+using BH.oM.Quantities.Attributes;
+using BH.Engine.Units;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates dew point temperature from dry-bulb temperature and relative humidity.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("relativeHumidity", "relative humidity (%)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("dewPointTemperature", "dew point temperature (C)")]
+        [Input("dryBulbTemperature", "Dry bulb temperature.", typeof(Temperature))]
+        [Input("relativeHumidity", "Relative humidity (%).", typeof(double))]
+        [Input("pressure", "Pressure.", typeof(Pressure))]
+        [Output("dewPointTemperature", "Dew point temperature.", typeof(Temperature))]
         public static double DewPointRelativeHumidity(double dryBulbTemperature, double relativeHumidity, double pressure)
         {
+            if (dryBulbTemperature < 100)
+            {
+                // This warning is added because this method used to take dryBulbTemperature in C. 
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+            }
             relativeHumidity = relativeHumidity / 100;
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            double humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
-            return psy.GetTDewPointFromHumRatio(dryBulbTemperature, humidityRatio, pressure);
+            double humidityRatio = psy.GetHumRatioFromRelHum(dryBulbTemperature.ToDegreeCelsius(), relativeHumidity, pressure);
+            return psy.GetTDewPointFromHumRatio(dryBulbTemperature.ToDegreeCelsius(), humidityRatio, pressure).FromDegreeCelsius();
         }
     }
 }
