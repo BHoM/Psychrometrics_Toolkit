@@ -40,7 +40,7 @@ namespace BH.Engine.Psychrometrics
         [Output("saturatedVapourPressure", "Saturated Vapour Pressure.", typeof(Pressure))]
         public static double SaturatedVapourPressureWater(double temperature)
         {
-            double pressureBars = 0;
+            double pressureBars;
             double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)
             {
