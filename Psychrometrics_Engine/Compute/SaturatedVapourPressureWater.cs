@@ -40,8 +40,7 @@ namespace BH.Engine.Psychrometrics
         [Output("saturatedVapourPressure", "Saturated Vapour Pressure.", typeof(Pressure))]
         public static double SaturatedVapourPressureWater(double temperature)
         {
-            BH.Engine.Base.Compute.RecordWarning("This method has not been thoroughly tested. The output may be incorrect. Use at own risk.");
-
+            double pressureBars;
             double t = Units.Convert.ToDegreeCelsius(temperature);
             if (t < 0 || t > 150)
             {
@@ -50,12 +49,13 @@ namespace BH.Engine.Psychrometrics
             }
             else if (Units.Convert.ToDegreeCelsius(temperature) < 21)
             {
-                return 6.10830198582769e-03 + 3.69554702125838e-04 * t + 2.4671509929139e-05 * Math.Pow(t, 2);
+                pressureBars = 6.10830198582769e-03 + 3.69554702125838e-04 * t + 2.4671509929139e-05 * Math.Pow(t, 2);
             }
             else
             {
-                return 2.76521518826485e-02 - 1.9984832033515e-03 * t + 1.26386221381836e-04 * Math.Pow(t, 2) - 2.43248314291122E-06 * Math.Pow(t, 3) + 3.97667179186101E-08 * Math.Pow(t, 4) - 2.63438493242063e-10 * Math.Pow(t, 5) + 1.23191485224688e-12 * Math.Pow(t, 6) - 2.20158156672378E-15 * Math.Pow(t, 7);
+                pressureBars = 2.76521518826485e-02 - 1.9984832033515e-03 * t + 1.26386221381836e-04 * Math.Pow(t, 2) - 2.43248314291122E-06 * Math.Pow(t, 3) + 3.97667179186101E-08 * Math.Pow(t, 4) - 2.63438493242063e-10 * Math.Pow(t, 5) + 1.23191485224688e-12 * Math.Pow(t, 6) - 2.20158156672378E-15 * Math.Pow(t, 7);
             }
+            return Units.Convert.FromBar(pressureBars);
         }
     }
 }
