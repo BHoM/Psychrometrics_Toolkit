@@ -20,28 +20,30 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
+using BH.oM.Quantities.Attributes;
+using BH.Engine.Units;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates wet-bulb temperature from dry-bulb temperature and relative humidity.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
+        [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
         [Input("relativeHumidity", "relative humidity (%)")]
         [Input("pressure", "pressure (Pa)")]
-        [Output("wetBulbTemperature", "wet-bulb temperature (C)")]
+        [Output("wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
         public static double WetBulbTemperatureRelativeHumidity(double dryBulbTemperature, double relativeHumidity, double pressure)
         {
+            if (dryBulbTemperature < 100)
+            {
+                // This warning is added because this method used to take dryBulbTemperature in C.
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+            }
             relativeHumidity = relativeHumidity / 100;
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetTWetBulbFromRelHum(dryBulbTemperature, relativeHumidity, pressure);
+            return psy.GetTWetBulbFromRelHum(dryBulbTemperature.ToDegreeCelsius(), relativeHumidity, pressure).FromDegreeCelsius();
         }
     }
 }
