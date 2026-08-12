@@ -32,14 +32,14 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates dew point temperature from dry-bulb temperature and wet-bulb temperature.")]
         [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
         [Input("wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
-        [Input("pressure", "pressure (Pa)")]
+        [Input("pressure", "Pressure.", typeof(Pressure))]
         [Output("dewPointTemperature", "Dew point temperature.", typeof(Temperature))]
         public static double DewPointWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
             if (dryBulbTemperature < 100 || wetBulbTemperature < 100)
             {
                 // This warning is added because this method used to take temperatures in C.
-                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celsius/Fahrenheit instead of Kelvin. Check your inputs.");
             }
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
             return psy.GetTDewPointFromTWetBulb(dryBulbTemperature.ToDegreeCelsius(), wetBulbTemperature.ToDegreeCelsius(), pressure).FromDegreeCelsius();

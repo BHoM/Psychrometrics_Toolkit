@@ -31,15 +31,15 @@ namespace BH.Engine.Psychrometrics
     {
         [Description("Calculates relative humidity from dry-bulb temperature and humidity ratio.")]
         [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
-        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("relativeHumidity", "relative humidity (%)")]
+        [Input("humidityRatio", "Humidity ratio (kg_water/kg_dryair).", typeof(Ratio))]
+        [Input("pressure", "Pressure.", typeof(Pressure))]
+        [Output("relativeHumidity", "Relative humidity (%).")]
         public static double RelativeHumidityHumidityRatio(double dryBulbTemperature, double humidityRatio, double pressure)
         {
             if (dryBulbTemperature < 100)
             {
                 // This warning is added because this method used to take dryBulbTemperature in C.
-                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celsius/Fahrenheit instead of Kelvin. Check your inputs.");
             }
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
             return psy.GetRelHumFromHumRatio(dryBulbTemperature.ToDegreeCelsius(), humidityRatio, pressure) * 100;

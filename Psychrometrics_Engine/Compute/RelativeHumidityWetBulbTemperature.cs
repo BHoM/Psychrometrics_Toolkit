@@ -32,14 +32,14 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates relative humidity from dry-bulb temperature and wet-bulb temperature.")]
         [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
         [Input("wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("relativeHumidity", "relative humidity (%)")]
+        [Input("pressure", "Pressure.", typeof(Pressure))]
+        [Output("relativeHumidity", "Relative humidity (%).")]
         public static double RelativeHumidityWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
             if (dryBulbTemperature < 100 || wetBulbTemperature < 100)
             {
                 // This warning is added because this method used to take temperatures in C.
-                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celsius/Fahrenheit instead of Kelvin. Check your inputs.");
             }
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
             return psy.GetRelHumFromTWetBulb(dryBulbTemperature.ToDegreeCelsius(), wetBulbTemperature.ToDegreeCelsius(), pressure) * 100;

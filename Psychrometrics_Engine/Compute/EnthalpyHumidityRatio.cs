@@ -31,14 +31,14 @@ namespace BH.Engine.Psychrometrics
     {
         [Description("Calculates enthalpy from dry-bulb temperature and humidity ratio.")]
         [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
-        [Input("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
-        [Output("enthalpy", "enthalpy (J/kg)")]
+        [Input("humidityRatio", "Humidity ratio (kg_water/kg_dryair).", typeof(Ratio))]
+        [Output("enthalpy", "Enthalpy.", typeof(SpecificEnergy))]
         public static double EnthalpyHumidityRatio(double dryBulbTemperature, double humidityRatio)
         {
             if (dryBulbTemperature < 100)
             {
                 // This warning is added because this method used to take dryBulbTemperature in C.
-                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celsius/Fahrenheit instead of Kelvin. Check your inputs.");
             }
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
             return psy.GetMoistAirEnthalpy(dryBulbTemperature.ToDegreeCelsius(), humidityRatio);

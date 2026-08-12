@@ -31,15 +31,15 @@ namespace BH.Engine.Psychrometrics
     {
         [Description("Calculates specific volume from dry-bulb temperature and relative humidity.")]
         [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
-        [Input("relativeHumidity", "relative humidity (%)")]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("specificVolume", "specific volume(m3/kg)")]
+        [Input("relativeHumidity", "Relative humidity (%).")]
+        [Input("pressure", "Pressure.", typeof(Pressure))]
+        [Output("specificVolume", "Specific volume.", typeof(VolumePerQuantity))]
         public static double SpecificVolumeRelativeHumidity(double dryBulbTemperature, double relativeHumidity, double pressure)
         {
             if (dryBulbTemperature < 100)
             {
                 // This warning is added because this method used to take dryBulbTemperature in C.
-                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celsius/Fahrenheit instead of Kelvin. Check your inputs.");
             }
             relativeHumidity = relativeHumidity / 100;
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
