@@ -20,27 +20,29 @@
  * along with this code. If not, see <https://www.gnu.org/licenses/lgpl-3.0.html>.      
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using BH.oM.Base.Attributes;
+using BH.oM.Quantities.Attributes;
+using BH.Engine.Units;
 
 namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
         [Description("Calculates humidity ratio from dry-bulb temperature and wet-bulb temperature.")]
-        [Input("dryBulbTemperature", "dry-bulb temperature (C)")]
-        [Input("wetBulbTemperature", "wet-bulb temperature (C)")]
+        [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
+        [Input("wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
         [Input("pressure", "pressure (Pa)")]
         [Output("humidityRatio", "humidity ratio (kg_water/kg_dryair)")]
         public static double HumidityRatioWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
+            if (dryBulbTemperature < 100 || wetBulbTemperature < 100)
+            {
+                // This warning is added because this method used to take temperatures in C.
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+            }
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
-            return psy.GetHumRatioFromTWetBulb(dryBulbTemperature, wetBulbTemperature, pressure);
+            return psy.GetHumRatioFromTWetBulb(dryBulbTemperature.ToDegreeCelsius(), wetBulbTemperature.ToDegreeCelsius(), pressure);
         }
     }
 }
