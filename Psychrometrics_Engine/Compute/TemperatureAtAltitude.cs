@@ -36,7 +36,7 @@ namespace BH.Engine.Psychrometrics
     {
         [Description("Calculates air temperature as a function of altitude above sea level.")]
         [Input("altitude", "Altitude above sea level.", typeof(Length))]
-        [Output("air temperature", "Air Temperature.", typeof(Temperature))]
+        [Output("air temperature", "Air temperature.", typeof(Temperature))]
         public static double TemperatureAtAltitude(double altitude)
         {
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);

@@ -34,7 +34,7 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates atmospheric pressure as a function of altitude.")]
-        [Input("altitude", "Altitude", typeof(Length))]
+        [Input("altitude", "Altitude.", typeof(Length))]
         [Output("atmosphericPressure", "Atmospheric pressure.", typeof(Pressure))]
         public static double PressureAtAltitude(double altitude)
         {

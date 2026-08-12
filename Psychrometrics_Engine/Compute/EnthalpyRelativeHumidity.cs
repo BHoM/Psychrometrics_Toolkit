@@ -39,7 +39,7 @@ namespace BH.Engine.Psychrometrics
             if (dryBulbTemperature < 100)
             {
                 // This warning is added because this method used to take dryBulbTemperature in C.
-                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celsius/Fahrenheit instead of Kelvin. Check your inputs.");
             }
             relativeHumidity = relativeHumidity / 100;
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);

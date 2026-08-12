@@ -32,14 +32,14 @@ namespace BH.Engine.Psychrometrics
         [Description("Calculates density from dry-bulb temperature and wet-bulb temperature.")]
         [Input("dryBulbTemperature", "Dry-bulb temperature.", typeof(Temperature))]
         [Input("wetBulbTemperature", "Wet-bulb temperature.", typeof(Temperature))]
-        [Input("pressure", "pressure (Pa)")]
-        [Output("density", "density (kg/m3)")]
+        [Input("pressure", "Pressure.", typeof(Pressure))]
+        [Output("density", "Density.", typeof(Density))]
         public static double DensityWetBulbTemperature(double dryBulbTemperature, double wetBulbTemperature, double pressure)
         {
             if (dryBulbTemperature < 100 || wetBulbTemperature < 100)
             {
                 // This warning is added because this method used to take temperatures in C.
-                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celcius/Fahrenheit instead of Kelvin. Check your inputs.");
+                Base.Compute.RecordWarning("It looks like you have entered a temperature in Celsius/Fahrenheit instead of Kelvin. Check your inputs.");
             }
             PsychroLib.Psychrometrics psy = new PsychroLib.Psychrometrics(PsychroLib.UnitSystem.SI);
             double humidityRatio = psy.GetHumRatioFromTWetBulb(dryBulbTemperature.ToDegreeCelsius(), wetBulbTemperature.ToDegreeCelsius(), pressure);
