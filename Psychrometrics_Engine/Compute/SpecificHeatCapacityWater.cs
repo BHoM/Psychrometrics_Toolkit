@@ -35,9 +35,9 @@ namespace BH.Engine.Psychrometrics
 {
     public static partial class Compute
     {
-        [Description("Calculates Water SpecificHeatCapacity from water temperature.")]
-        [Input("temperature", "Water Temperature.", typeof(Temperature))]
-        [Output("specificHeatCapacity", "Specific Heat Capacity (kJ/kgK).")]
+        [Description("Calculates specific heat capacity of water from temperature.")]
+        [Input("temperature", "Water temperature.", typeof(Temperature))]
+        [Output("specificHeatCapacity", "Specific heat capacity (kJ/kgK).")]
         public static double SpecificHeatCapacityWater(double temperature)
         {
             // add temperature conversion here

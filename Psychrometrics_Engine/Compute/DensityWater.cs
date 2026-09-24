@@ -37,7 +37,7 @@ namespace BH.Engine.Psychrometrics
     public static partial class Compute
     {
         [Description("Calculates water density from temperature.")]
-        [Input("temperature", "Water Temperature.", typeof(Temperature))]
+        [Input("temperature", "Water temperature.", typeof(Temperature))]
         [Output("density", "Density.", typeof(Density))]
         public static double DensityWater(double temperature)
         {
