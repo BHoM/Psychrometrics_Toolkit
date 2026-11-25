@@ -54,15 +54,15 @@ namespace BH.Engine.Psychrometrics
             List<List<double>> openLow = new List<List<double>>();
             List<List<double>> openHigh = new List<List<double>>();
             List<Output<List<double>, List<double>, List<double>>> finished = new List<Output<List<double>, List<double>, List<double>>>();
-            for (int i = 0; i <= 44; i++)
+            for (int i = 0; i <= 220; i++)
             {
-                double temperature = 14d + i * 0.5;
+                double temperature = 14d + i * 0.1;
                 List<double> spanLow = new List<double>();
                 List<double> spanHigh = new List<double>();
                 bool open = false;
                 double low = 0;
                 double high = 0;
-                for (int humidity = 0; humidity <= 100; humidity += 2)
+                for (int humidity = 0; humidity <= 100; humidity++)
                 {
                     if (!ComfortZoneContains(temperature, humidity, relativeAirSpeed, metabolic, clothing, pressure, out double grams))
                     {
